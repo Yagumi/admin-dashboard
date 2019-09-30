@@ -23,7 +23,7 @@ const Item = styled.li`
   padding: 24px 31px;
   list-style-type: none;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   text-align: left;
   border-bottom: 1px solid #dfe0eb;

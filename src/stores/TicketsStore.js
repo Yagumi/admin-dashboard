@@ -1,6 +1,5 @@
 /* eslint-disable no-console */
-import { observable, action, configure, decorate, runInAction } from 'mobx';
-// import axios from 'axios';
+import { observable, action, configure, decorate, runInAction, computed } from 'mobx';
 
 configure({ enforceActions: 'observed' });
 
@@ -9,46 +8,126 @@ class TicketsStore {
     { title: 'Ticket details', name: 'Customer name', date: 'Date', priority: 'Priority' },
   ];
 
-  tickets = [];
+  tickets = observable.array();
 
-  getTickets = async () => {
-    // eslint-disable-next-line no-unused-vars
-    const res = await fetch('http://www.json-generator.com/api/json/get/bVRFSTnmaa?indent=2')
+  currentId = 0;
+
+  result = 0;
+
+  sortVal = false;
+
+  filter = '';
+
+  fetchTickets = async () => {
+    await fetch('http://www.json-generator.com/api/json/get/ceBqMfCdbC?indent=2')
       .then(response => response.json())
       .then(data => {
-        // eslint-disable-next-line no-console
-        console.log(data);
         runInAction(() => {
+          this.tickets = data;
+          // this.allPages = [...this.allPages, data];
+          data.map(() => this.result++);
+        });
+      });
+  };
+
+  get viewTicketsHeader() {
+    return this.ticketsHeader.map(item => item);
+  }
+
+  goToNextPage = async () => {
+    await fetch('http://www.json-generator.com/api/json/get/cpkRrMXVvm?indent=2')
+      .then(response => response.json())
+      .then(data => {
+        runInAction(() => {
+          this.currentId += 1;
+          data.map(() => this.result++);
           this.tickets = data;
         });
       });
-
-    // const res = await axios.get('http://www.json-generator.com/api/json/get/cgAWpBccUi?indent=2');
-    // console.log(res.value);
-    // console.log(res);
-    // runInAction(() => {
-    //   this.tickets = res.data;
-    //   return this.tickets;
-    // });
   };
 
-  viewPage = () => {
-    return this.tickets.filter((item, index) => index <= 7);
+  goToPrevPage = async () => {
+    await fetch('http://www.json-generator.com/api/json/get/bVxKtlPCXm?indent=2')
+      .then(response => response.json())
+      .then(data => {
+        runInAction(() => {
+          this.currentId -= 1;
+          data.map(() => this.result--);
+          this.tickets = data;
+        });
+      });
   };
 
-  viewAllPages = () => {
-    return this.tickets.map(item => item);
-  };
+  get NumberOfTickets() {
+    if (this.result === 0) {
+      return this.result;
+    }
+    return this.result - 7;
+  }
 
-  getTicketsHeader = () => {
-    return this.ticketsHeader.map(item => item);
-  };
+  get numOptions() {
+    return this.currentId;
+  }
+
+  sort() {
+    this.tickets.map(item => {
+      if (item.priority === 'HIGH') {
+        item.priorityRang = 3;
+      }
+      if (item.priority === 'NORMAL') {
+        item.priorityRang = 2;
+      }
+      if (item.priority === 'LOW') {
+        item.priorityRang = 1;
+      }
+      return item;
+    });
+    if (this.sortVal === false) {
+      this.sortVal = true;
+      return this.tickets.replace(
+        this.tickets.slice().sort((a, b) => a.priorityRang - b.priorityRang),
+      );
+    }
+    if (this.sortVal === true) {
+      this.sortVal = false;
+      return this.tickets.replace(
+        this.tickets.slice().sort((a, b) => b.priorityRang - a.priorityRang),
+      );
+    }
+    return null;
+  }
+
+  get filtredTickets() {
+    const matchesFilter = new RegExp(this.filter, 'i');
+    return this.tickets.filter(({ task }) => !this.filter || matchesFilter.test(task));
+  }
+
+  updateFilter(value) {
+    this.filter = value;
+  }
+
+  get currentIdValue() {
+    return this.currentId;
+  }
 }
 
 decorate(TicketsStore, {
   tickets: observable.shallow,
+  filter: observable,
+  result: observable,
+  currentId: observable,
+
   viewData: action,
-  getTicketsHeader: action,
+  goToPrevPage: action,
+  sort: action,
+  updateFilter: action,
+
+  viewTicketsHeader: computed,
+  NumberOfTickets: computed,
+  numOptions: computed,
+  filtredTickets: computed,
+  currentIdValue: computed,
 });
 
-export default new TicketsStore();
+const ticketsStore = new TicketsStore();
+export default ticketsStore;

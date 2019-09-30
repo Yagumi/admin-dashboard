@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { observer } from 'mobx-react';
 import ListItem from './ListItem';
 import TicketItem from './TicketItem';
 import { TicketsHeader, Tickets, Name, Date, Priority } from '../styles/ListsStyle';
 
-const Lists = ({ data, name, children, ...props }) => {
+const Lists = observer(({ data, name, children, ...props }) => {
   if (name === 'ticketsHeader') {
     return (
       <ul data={data} {...props}>
@@ -24,16 +25,28 @@ const Lists = ({ data, name, children, ...props }) => {
     return (
       <ul data={data} {...props}>
         {data.map(item => (
-          <TicketItem key={data.id} data={item} />
+          <TicketItem key={item.id} data={item} />
         ))}
       </ul>
     );
   }
   if (name === 'cards') {
     return (
-      <ul arr={data} {...props}>
+      <ul data={data} {...props}>
         {data.map(item => (
-          <ListItem key={data.id} data={item}>
+          <ListItem key={item.id} data={item}>
+            <h3>{item.title}</h3>
+            <span>{item.num}</span>
+          </ListItem>
+        ))}
+      </ul>
+    );
+  }
+  if (name === 'unresolvedList') {
+    return (
+      <ul data={data} {...props}>
+        {data.map(item => (
+          <ListItem key={item.id} data={item}>
             <h3>{item.title}</h3>
             <span>{item.num}</span>
           </ListItem>
@@ -43,7 +56,7 @@ const Lists = ({ data, name, children, ...props }) => {
   }
 
   return <ul>{children}</ul>;
-};
+});
 
 Lists.propTypes = {
   data: PropTypes.any,

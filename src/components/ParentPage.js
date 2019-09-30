@@ -1,9 +1,6 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { observer } from 'mobx-react';
-
-import TicketsStore from '../stores/TicketsStore';
-import OverviewStore from '../stores/OverviewStore';
 
 import { Container, Content, Title } from '../styles/ParentPageStyles';
 
@@ -13,9 +10,6 @@ import MainContent from './MainContent';
 
 const ParentPage = observer(({ match }) => {
   const title = match.params.name;
-  useEffect(() => {
-    TicketsStore.getTickets();
-  }, []);
   return (
     <Container>
       <SidebarList />
@@ -23,7 +17,7 @@ const ParentPage = observer(({ match }) => {
         <Header title={title}>
           <Title>{title}</Title>
         </Header>
-        <MainContent title={title} ticketsData={TicketsStore} overviewData={OverviewStore} />
+        <MainContent title={title} />
       </Content>
     </Container>
   );

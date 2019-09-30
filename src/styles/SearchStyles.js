@@ -9,6 +9,7 @@ const Container = styled.div`
 
 const Input = styled.input`
   margin-left: 30px;
+  padding-left: 10px;
   height: 34px;
   border: none;
   padding-right: 46px;
@@ -16,7 +17,6 @@ const Input = styled.input`
 
 const Image = styled.img`
   position: absolute;
-  top: 15px;
   right: 15px;
   width: 16px;
   height: 16px;

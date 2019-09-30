@@ -9,6 +9,16 @@ const TicketsContainer = styled.main`
   background-color: #ffffff;
   border: 1px solid #dfe0eb;
   border-radius: 8px;
+  & > h1 {
+    margin: 0;
+    font-family: 'Muli', Arial, sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 30px;
+    letter-spacing: 0.3px;
+    color: #252733;
+  }
   & > h3 {
     margin: 0;
     padding: 32px 0 48px 31px;
@@ -81,4 +91,9 @@ const CardsList = styled(Lists)`
   }
 `;
 
-export { Container, TicketsContainer, TicketsHeader, TicketsList, CardsList };
+// Overview page
+const Footer = styled.footer`
+  display: flex;
+`;
+
+export { Container, TicketsContainer, TicketsHeader, TicketsList, CardsList, Footer };

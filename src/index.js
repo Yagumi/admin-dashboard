@@ -2,13 +2,22 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'mobx-react';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
+import ticketsStore from './stores/TicketsStore';
+import overviewStore from './stores/OverviewStore';
+import tasksStore from './stores/TasksStore';
+
+const stores = { ticketsStore, overviewStore, tasksStore };
+
 ReactDOM.render(
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>,
+  <Provider {...stores}>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </Provider>,
   document.getElementById('root'),
 );
 

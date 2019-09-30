@@ -1,3 +1,6 @@
-.App {
-    max-width: 1440px;
+@font-face{
+    font-family: 'Muli';
+    src: url('../src/fonts/Muli/Muli.ttf') format('truetype');
+    font-weight: normal; 
+    font-style: normal;
 }
