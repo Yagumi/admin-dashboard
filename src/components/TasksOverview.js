@@ -4,7 +4,7 @@ import { inject, observer } from 'mobx-react';
 
 import Container from '../styles/TasksOverviewStyles';
 import HeaderListsContainer from '../styles/HeaderListsStyles';
-import TaskItem from './TaskItem';
+import TaskItem from '../containers/TaskItem';
 import plus from '../img/plus.svg';
 
 const TasksOverview = inject('tasksStore')(

@@ -14,7 +14,7 @@ import {
 
 import Sort from './Sort';
 import TicketsFooter from './TicketsFooter';
-import UnresolvedTickets from './UnresolvedTickets';
+import UnresolvedTickets from '../containers/UnresolvedTickets';
 import TaskOverview from './TasksOverview';
 
 const MainContent = inject('ticketsStore', 'overviewStore')(

@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
 
-import HeaderLists from '../components/HeaderLists';
+import HeaderLists from '../containers/HeaderLists';
 
 const titleSame = css({
   margin: 0,

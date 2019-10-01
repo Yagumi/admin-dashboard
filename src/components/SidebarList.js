@@ -10,10 +10,9 @@ import Agents from '../img/5. agents.svg';
 import Articles from '../img/6. articles.svg';
 import Settings from '../img/a_1. settings.svg';
 import Subscription from '../img/a_2. subscription.svg';
-
-import SidebarItem from './StidebarItem';
-
 import { Container, Logo, List } from '../styles/SidebarListStyles';
+
+import SidebarItem from '../containers/SidebarItem';
 
 const SidebarList = ({ list, ...props }) => {
   return (

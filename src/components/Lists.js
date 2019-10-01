@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { observer } from 'mobx-react';
-import ListItem from './ListItem';
-import TicketItem from './TicketItem';
+import ListItem from '../containers/ListItem';
+import TicketItem from '../containers/TicketItem';
 import { TicketsHeader, Tickets, Name, Date, Priority } from '../styles/ListsStyle';
 
 const Lists = observer(({ data, name, children, ...props }) => {

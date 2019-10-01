@@ -4,9 +4,9 @@ import { observer } from 'mobx-react';
 
 import { Container, Content, Title } from '../styles/ParentPageStyles';
 
-import SidebarList from './SidebarList';
+import SidebarList from '../components/SidebarList';
 import Header from './Header';
-import MainContent from './MainContent';
+import MainContent from '../components/MainContent';
 
 const ParentPage = observer(({ match }) => {
   const title = match.params.name;

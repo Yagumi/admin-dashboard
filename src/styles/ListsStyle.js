@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import ListItem from '../components/ListItem';
+import ListItem from '../containers/ListItem';
 
 const TicketsHeader = styled(ListItem)`
   display: flex;

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import ParentPage from './components/ParentPage';
+
+import ParentPage from './containers/ParentPage';
 
 function App() {
   return (

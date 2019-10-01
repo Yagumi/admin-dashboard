@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import Container from '../styles/HeaderStyles';
 
-import Search from './Search';
+import Search from '../components/Search';
 import Notification from './Notification';
 import UserAvatar from './UserAvatar';
 
